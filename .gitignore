@@ -102,3 +102,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Don't track Python Morsels testfiles
+test_*.py
