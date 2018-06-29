@@ -1,30 +1,23 @@
-"""Two initial solutions to the is_anagram exercise
+"""Second attempt, including bonus where
+accented Latin characters are coerced to
+basic ASCII characters
 
-06/25/2018
+06/28/18
 """
+
+
+import unicodedata
 from collections import Counter
 
 
 def is_anagram(string1, string2):
-    """Determine if two strings are anagrams.
-
-    Spaces and non-alphanumeric characters are ignored
-    """
-    def to_sorted_list(string):
-        return sorted([
+    def to_counter(string):
+        """Normalize string and return a Counter object"""
+        string = unicodedata.normalize('NFD', string)
+        string = [
             char
             for char in string.lower()
-            if char.isalnum()
-        ])
-    return to_sorted_list(string1) == to_sorted_list(string2)
-
-
-def is_anagram_alt(string1, string2):
-    """Alternate implmentation"""
-    def to_counter_dict(string):
-        return dict(Counter([
-            char
-            for char in string.lower()
-            if char.isalnum()
-        ]))
-    return to_counter_dict(string1) == to_counter_dict(string2)
+            if char.isalpha()
+        ]
+        return Counter(string)
+    return to_counter(string1) == to_counter(string2)
