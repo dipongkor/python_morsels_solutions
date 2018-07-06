@@ -1,5 +1,4 @@
-"""Revised solution to circle exercise using
-property/setter decorators
+"""Initial solutions to circle exercise
 
 07/03/2018
 """
@@ -20,26 +19,28 @@ class Circle():
         self.radius = radius
 
     def __repr__(self):
-        return "Circle({})".format(self.radius)
+        return "Circle({})".format(self._radius)
 
-    @property
-    def radius(self):
+    def set_radius(self, new_rad):
+        if new_rad < 0:
+            raise ValueError("Radius cannot be negative")
+        self._radius = new_rad
+
+    def get_radius(self):
         return self._radius
 
-    @radius.setter
-    def radius(self, new_val):
-        if new_val < 0:
-            raise ValueError("Radius cannot be negative")
-        self._radius = new_val
+    def set_diameter(self, new_dia):
+        self.radius = new_dia / 2
 
-    @property
-    def diameter(self):
+    def get_diameter(self):
         return self.radius * 2
 
-    @diameter.setter
-    def diameter(self, new_val):
-        self.radius = new_val / 2
+    def set_area(self, new_area):
+        raise AttributeError("Area cannot be set directy")
 
-    @property
-    def area(self):
+    def get_area(self):
         return pi * self.radius ** 2
+
+    radius = property(get_radius, set_radius)
+    diameter = property(get_diameter, set_diameter)
+    area = property(get_area, set_area)
