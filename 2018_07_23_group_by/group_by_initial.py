@@ -1,7 +1,6 @@
-"""Revised solution to Group By exercise
-   - Make use of setdefault() method of dict
+"""Initial solution to Group By exercise
 
-07/27/2018
+07/23/2018
 """
 
 
@@ -14,5 +13,8 @@ def group_by(iterable, key_func=lambda x: x):
     """
     groups = {}
     for item in iterable:
-        groups.setdefault(key_func(item), []).append(item)
+        try:
+            groups[key_func(item)].append(item)
+        except KeyError:
+            groups[key_func(item)] = [item]
     return groups
