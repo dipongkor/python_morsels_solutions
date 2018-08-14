@@ -1,7 +1,9 @@
-"""Initial solution to lstrip exercise
+"""Revised solution to lstrip exercise (using dropwhile())
 
-07/30/2018
+08/06/2018
 """
+
+import itertools
 
 
 def lstrip(iterable, to_skip):
@@ -15,16 +17,9 @@ def lstrip(iterable, to_skip):
     return value is truthy, the item is skipped if
     at the beginning of the list
     """
-    unskippable_seen = False
-    for item in iterable:
-        if unskippable_seen:
-            yield item
-        else:
-            try:
-                if not to_skip(item):
-                    unskippable_seen = True
-                    yield item
-            except TypeError:
-                if item != to_skip:
-                    unskippable_seen = True
-                    yield item
+    if callable(to_skip):
+        predicate = to_skip
+    else:
+        def predicate(item):
+            return item == to_skip
+    return itertools.dropwhile(predicate, iterable)
