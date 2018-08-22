@@ -1,6 +1,6 @@
 """Initial solution to point exercise
 
-08/313/2018
+08/13/2018
 """
 
 

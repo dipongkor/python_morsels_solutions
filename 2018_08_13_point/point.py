@@ -2,7 +2,7 @@
 
 Removes _do_binary_op, which was needlessly confusing
 
-08/313/2018
+08/21/2018
 """
 
 
