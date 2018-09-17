@@ -2,7 +2,7 @@
 
 Returns a generator
 
->>> nums = parse_ranges('1-3, 8')
+>>> nums = parse_ranges('1-3, 8, 18->exit')
 >>> next(nums)
 1
 >>> next(nums)
@@ -11,6 +11,8 @@ Returns a generator
 3
 >>> next(nums)
 8
+>>> next(nums)
+18
 """
 
 
