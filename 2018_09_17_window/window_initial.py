@@ -1,10 +1,4 @@
-"""
-Revised solution to window exercise that gets rid of
-if statement to check length of queue within body of loop
-"""
-
 from collections import deque
-from itertools import islice
 
 
 def window(iterable, n):
@@ -18,11 +12,13 @@ def window(iterable, n):
     >>> next(tups)
     (3, 4)
     """
-    i = iter(iterable)
-    q = deque(islice(i, n), maxlen=n)
+    q = deque()
+    it = iter(iterable)
     while True:
-        yield tuple(q)
         try:
-            q.append(next(i))
+            q.append(next(it))
+            if len(q) == n:
+                yield tuple(q)
+                q.popleft()
         except StopIteration:
             break
