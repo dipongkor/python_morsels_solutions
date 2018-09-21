@@ -20,9 +20,7 @@ def window(iterable, n):
     """
     i = iter(iterable)
     q = deque(islice(i, n), maxlen=n)
-    while True:
+    yield tuple(q)
+    for item in i:
+        q.append(item)
         yield tuple(q)
-        try:
-            q.append(next(i))
-        except StopIteration:
-            break
