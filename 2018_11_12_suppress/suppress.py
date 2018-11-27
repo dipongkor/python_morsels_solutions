@@ -3,20 +3,14 @@ class suppress():
         self.exceptions = exceptions
         self.exception = None
         self.traceback = None
-        # print("__init__ called")
 
     def __enter__(self):
-        # print("__enter__ called")
         return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        # print ("__exit__ called")
         if exc_type:
             self.exception = exc_value
             self.traceback = exc_traceback
-            # print('exc_type: {}'.format(exc_type))
-            # print('exc_value: {}'.format(exc_value))
-            # print('exc_traceback: {}'.format(exc_traceback))
 
             if exc_type in self.exceptions:
                 return True  # Don't raise the exception
